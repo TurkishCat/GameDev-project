@@ -49,7 +49,7 @@ namespace monotest
                 Exit();
 
             // TODO: Add your update logic here
-            michael.Update();
+            michael.Update(gameTime);
 
             base.Update(gameTime);
         }
