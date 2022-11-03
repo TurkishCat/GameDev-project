@@ -30,9 +30,10 @@ namespace monotest
 
         public Vector2 Speed { get; set ; }
         public Vector2 Position { get ; set ; }
-        public IInputReader InputReader { get ; set; }
+        public KeyboardReader InputReader { get ; set; }
+        
 
-        public Michael(Texture2D texture, Vector2 speed, Vector2 position, IInputReader inputReader)
+        public Michael(Texture2D texture, Vector2 speed, Vector2 position, KeyboardReader inputReader)
         {
             
             michaelTexture = texture;
@@ -42,9 +43,9 @@ namespace monotest
             this.Speed = speed;
             this.Position = position;
             this.InputReader = inputReader;
-            
-            
-            
+
+
+            #region Walking Animation
             // X begint op 48 want sprite sheet heeft veel whitespace
 
             animationWalking.AddFrame(new AnimationFrame(new Rectangle(55, 0, 18, 48)));
@@ -59,9 +60,13 @@ namespace monotest
             animationWalking.AddFrame(new AnimationFrame(new Rectangle(215, 0, 15, 48)));
             animationWalking.AddFrame(new AnimationFrame(new Rectangle(230, 0, 21, 48)));
             animationWalking.AddFrame(new AnimationFrame(new Rectangle(251, 0, 22, 48)));
+            #endregion
 
+            #region Idle Animation
             //idle animation
-            
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(52, 330, 28, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(52, 330, 28, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(52, 330, 28, 55)));
@@ -78,8 +83,6 @@ namespace monotest
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(34, 330, 17, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(34, 330, 17, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
-            
-
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(140, 148, 20, 50)));
@@ -99,15 +102,24 @@ namespace monotest
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(215, 270, 17, 52)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
             animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
-
+            #endregion 
 
         }
 
         public void Update(GameTime gameTime)
         {
             Move();
-
-            animationIdle.Update(gameTime, 5);
+            if (this.InputReader.IsWalking)
+            {
+                animationIdle.Counter = 0;
+                animationWalking.Update(gameTime, 10);
+            }
+            else
+            {
+                animationWalking.Counter = 0;
+                animationIdle.Update(gameTime, 5);
+            }
+            
             
         }
 
@@ -119,7 +131,10 @@ namespace monotest
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(michaelTexture, Position, animationIdle.CurrentFrame.SourceRectangle, Color.White);
+            if (this.InputReader.IsWalking)
+                spriteBatch.Draw(michaelTexture, Position, animationWalking.CurrentFrame.SourceRectangle, Color.White);
+            else
+                spriteBatch.Draw(michaelTexture, Position, animationIdle.CurrentFrame.SourceRectangle, Color.White);
 
         }
 

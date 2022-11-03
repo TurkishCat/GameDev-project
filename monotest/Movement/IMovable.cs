@@ -13,7 +13,7 @@ namespace monotest.Movement
     {
         public Vector2  Speed { get; set; }
         public Vector2 Position { get; set; }
-        public IInputReader InputReader { get; set; }
+        public KeyboardReader InputReader { get; set; }
         public Animation Animation { get; set; }
         void Move();
     }

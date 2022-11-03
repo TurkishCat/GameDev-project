@@ -16,6 +16,23 @@ namespace monotest.Animations
         private int counter;
         private double secondCounter = 0;
 
+        
+
+        public List<AnimationFrame> Frames
+        {
+            get { return frames; }
+            set { frames = value; }
+        }
+
+        
+
+        public int Counter
+        {
+            get { return counter; }
+            set { counter = value; }
+        }
+
+
 
         public Animation()
         {
@@ -30,6 +47,7 @@ namespace monotest.Animations
 
         public void Update(GameTime gameTime, int fpsAnimation)
         {
+            
             CurrentFrame = frames[counter];
 
             secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
@@ -45,6 +63,8 @@ namespace monotest.Animations
             {
                 counter = 0;
             }
+            
+            
 
             
         }
