@@ -28,12 +28,12 @@ namespace monotest.Animations
             CurrentFrame = frames[0];
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, int fpsAnimation)
         {
             CurrentFrame = frames[counter];
 
             secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
-            int fps = 10;
+            int fps = fpsAnimation;
 
             if (secondCounter >= 1d / fps)
             {

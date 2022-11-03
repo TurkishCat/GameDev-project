@@ -19,12 +19,13 @@ namespace monotest
         Texture2D michaelTexture;
         
         MovementManager movementManager;
-        Animation animation;
+        Animation animationWalking;
+        Animation animationIdle;
 
         public Animation Animation
         {
-            get { return animation; }
-            set { animation = value; }
+            get { return animationWalking; }
+            set { animationWalking = value; }
         }
 
         public Vector2 Speed { get; set ; }
@@ -35,7 +36,8 @@ namespace monotest
         {
             
             michaelTexture = texture;
-            animation = new Animation();
+            animationWalking = new Animation();
+            animationIdle = new Animation();
             movementManager = new MovementManager();
             this.Speed = speed;
             this.Position = position;
@@ -45,18 +47,59 @@ namespace monotest
             
             // X begint op 48 want sprite sheet heeft veel whitespace
 
-            animation.AddFrame(new AnimationFrame(new Rectangle(55, 0, 18, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(72, 0, 20, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(93, 0, 14, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(106, 0, 22, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(128, 0, 18, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(146, 0, 16, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(162, 0, 18, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(180, 0, 17, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(200, 0, 15, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(215, 0, 15, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(230, 0, 21, 48)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(251, 0, 22, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(55, 0, 18, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(72, 0, 20, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(93, 0, 14, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(106, 0, 22, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(128, 0, 18, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(146, 0, 16, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(162, 0, 18, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(180, 0, 17, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(200, 0, 15, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(215, 0, 15, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(230, 0, 21, 48)));
+            animationWalking.AddFrame(new AnimationFrame(new Rectangle(251, 0, 22, 48)));
+
+            //idle animation
+            
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(52, 330, 28, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(52, 330, 28, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(52, 330, 28, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(0, 330, 19, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(0, 330, 19, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(0, 330, 19, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(78, 330, 29, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(78, 330, 29, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(78, 330, 29, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(34, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(34, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(34, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            
+
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(140, 148, 20, 50)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(123, 148, 18, 50)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(105, 148, 19, 49)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(82, 148, 24, 49)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(161, 148, 20, 49)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(215, 270, 17, 52)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(232, 270, 26, 52)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(232, 270, 26, 52)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(232, 270, 26, 52)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(232, 270, 26, 52)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(232, 270, 26, 52)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(215, 270, 17, 52)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+            animationIdle.AddFrame(new AnimationFrame(new Rectangle(18, 330, 17, 55)));
+
 
         }
 
@@ -64,7 +107,7 @@ namespace monotest
         {
             Move();
 
-            animation.Update(gameTime);
+            animationIdle.Update(gameTime, 5);
             
         }
 
@@ -76,7 +119,7 @@ namespace monotest
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(michaelTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White);
+            spriteBatch.Draw(michaelTexture, Position, animationIdle.CurrentFrame.SourceRectangle, Color.White);
 
         }
 
