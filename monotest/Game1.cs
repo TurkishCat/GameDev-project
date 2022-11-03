@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using monotest.Input;
 using System;
 
 namespace monotest
@@ -40,7 +41,7 @@ namespace monotest
 
         private void InitializeGameObjects()
         {
-            michael = new Michael(_texture);
+            michael = new Michael(_texture, new Vector2(2,2),new Vector2(0,0),new KeyboardReader());
         }
 
         protected override void Update(GameTime gameTime)

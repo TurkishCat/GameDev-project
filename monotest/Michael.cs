@@ -7,22 +7,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using monotest.Animations;
+using System.Drawing.Text;
+using SharpDX.MediaFoundation;
+using monotest.Input;
+using monotest.Movement;
 
 namespace monotest
 {
-    public class Michael:IGameObject
+    public class Michael:IGameObject, IMovable
     {
         Texture2D michaelTexture;
         
+        MovementManager movementManager;
         Animation animation;
 
-        public Michael(Texture2D texture)
+        public Animation Animation
         {
+            get { return animation; }
+            set { animation = value; }
+        }
+
+        public Vector2 Speed { get; set ; }
+        public Vector2 Position { get ; set ; }
+        public IInputReader InputReader { get ; set; }
+
+        public Michael(Texture2D texture, Vector2 speed, Vector2 position, IInputReader inputReader)
+        {
+            
             michaelTexture = texture;
             animation = new Animation();
-
-            // X begint op 48 want sprite sheet heeft veel whitespace
+            movementManager = new MovementManager();
+            this.Speed = speed;
+            this.Position = position;
+            this.InputReader = inputReader;
             
+            
+            
+            // X begint op 48 want sprite sheet heeft veel whitespace
+
             animation.AddFrame(new AnimationFrame(new Rectangle(55, 0, 18, 48)));
             animation.AddFrame(new AnimationFrame(new Rectangle(72, 0, 20, 48)));
             animation.AddFrame(new AnimationFrame(new Rectangle(93, 0, 14, 48)));
@@ -40,15 +62,27 @@ namespace monotest
 
         public void Update(GameTime gameTime)
         {
+            Move();
+
             animation.Update(gameTime);
+            
+        }
+
+        private void Move()
+        {
+            movementManager.Move(this);
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(michaelTexture, new Vector2(0, 0), animation.CurrentFrame.SourceRectangle, Color.White);
+            spriteBatch.Draw(michaelTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White);
 
         }
 
-        
+        void IMovable.Move()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
